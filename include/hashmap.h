@@ -29,9 +29,9 @@ typedef struct HashMapEntry *HashMap[HASHMAP_NB_BUCKETS];
  * @param map The HashMap to add the element to
  * @param key The key with which the element will be stored and retrieved
  * @param element The element to add
- * @return True if a collision occurred (for statistics)
+ * @return A pointer to the pointer to the element.
  */
-bool hash_AddElement(HashMap map, char const *key, void *element);
+void **hash_AddElement(HashMap map, char const *key, void *element);
 
 /**
  * Replaces an element with an already-present key in a hashmap.
@@ -50,6 +50,14 @@ bool hash_ReplaceElement(HashMap const map, char const *key, void *element);
  * @return True if the element was found and removed
  */
 bool hash_RemoveElement(HashMap map, char const *key);
+
+/**
+ * Finds an element in a hashmap, and returns a pointer to its value field.
+ * @param map The map to consider the elements of
+ * @param key The key to search an element for
+ * @return A pointer to the pointer to the element, or NULL if not found.
+ */
+void **hash_GetNode(HashMap const map, char const *key);
 
 /**
  * Finds an element in a hashmap.
